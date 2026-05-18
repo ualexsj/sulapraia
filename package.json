@@ -1,5 +1,26 @@
 {
-  "scripts": {"dev":"next dev","build":"next build","start":"next start","lint":"next build"},
-  "dependencies": {"next":"latest","react":"latest","react-dom":"latest"},
-  "devDependencies": {"tailwindcss":"^3.4.17","typescript":"latest","postcss":"latest"}
+  "scripts": {
+    "check:node": "node scripts/check-node-version.cjs",
+    "predev": "npm run check:node",
+    "dev": "next dev",
+    "prebuild": "npm run check:node",
+    "build": "next build",
+    "prestart": "npm run check:node",
+    "start": "next start",
+    "lint": "next build"
+  },
+  "dependencies": {
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17",
+    "typescript": "latest",
+    "postcss": "latest"
+  },
+  "engines": {
+    "node": ">=20.11.0",
+    "npm": ">=10.0.0"
+  }
 }
