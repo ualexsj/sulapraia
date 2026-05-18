@@ -1,0 +1,3 @@
+import type { Metadata } from 'next';
+export const metadata: Metadata = { title: 'Política de troca', description: 'Condições de troca para pedidos atacadistas Sulapraia.' };
+export default function Trocas() { return <section className="px-5 pb-20 pt-32"><article className="mx-auto max-w-3xl rounded-[2rem] bg-white p-8"><h1 className="font-serif text-5xl">Política de troca</h1><p className="mt-6 leading-8 text-stone-600">Trocas por defeito de fabricação devem ser solicitadas pelo WhatsApp com fotos, número do pedido e etiqueta em até 7 dias do recebimento. Peças sem uso, odor ou avarias serão avaliadas pela equipe comercial.</p></article></section>; }

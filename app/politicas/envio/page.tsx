@@ -1,0 +1,3 @@
+import type { Metadata } from 'next';
+export const metadata: Metadata = { title: 'Política de envio', description: 'Envio Sulapraia para todo Brasil em pedidos de moda praia atacado.' };
+export default function Envio() { return <section className="px-5 pb-20 pt-32"><article className="mx-auto max-w-3xl rounded-[2rem] bg-white p-8"><h1 className="font-serif text-5xl">Política de envio</h1><p className="mt-6 leading-8 text-stone-600">Enviamos para todo o Brasil. O prazo e o valor do frete são calculados no checkout ou confirmados pela equipe via WhatsApp conforme CEP, volume do pedido e modalidade logística escolhida.</p></article></section>; }

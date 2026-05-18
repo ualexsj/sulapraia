@@ -1,0 +1,3 @@
+import type { MetadataRoute } from 'next';
+import { posts, products, site } from '@/lib/data';
+export default function sitemap(): MetadataRoute.Sitemap { const now = new Date(); return ['','/atacado','/checkout','/sobre','/contato','/politicas/trocas','/politicas/envio'].map(route => ({ url: `${site.url}${route}`, lastModified: now, changeFrequency: 'weekly' as const, priority: route === '' ? 1 : .7 })).concat(products.map(p => ({ url: `${site.url}/catalogo/${p.slug}`, lastModified: now, changeFrequency: 'weekly' as const, priority: .9 })), posts.map(p => ({ url: `${site.url}/blog/${p.slug}`, lastModified: new Date(p.date), changeFrequency: 'monthly' as const, priority: .75 }))); }

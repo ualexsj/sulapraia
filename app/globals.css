@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #fffaf6;
+  --foreground: #221612;
+  --nude: #ead4c4;
+  --sand: #d9bd9c;
+  --gold: #c49a52;
+  --ocean: #056b83;
+  --aqua: #94d8cf;
+}
+
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), Arial, sans-serif;
+  overflow-x: hidden;
+}
+::selection { background: rgba(196,154,82,.25); color: #221612; }
+.luxury-gradient { background: radial-gradient(circle at top left, rgba(148,216,207,.42), transparent 28%), linear-gradient(135deg, #fffaf6 0%, #f4e4d7 45%, #eefbf9 100%); }
+.gold-text { background: linear-gradient(90deg, #b38234, #e8c982, #a6772b); -webkit-background-clip: text; color: transparent; }
+.glass { background: rgba(255,250,246,.78); backdrop-filter: blur(18px); border: 1px solid rgba(196,154,82,.18); box-shadow: 0 24px 80px rgba(34,22,18,.08); }
+.card-hover { transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease; }
+.card-hover:hover { transform: translateY(-8px); box-shadow: 0 30px 80px rgba(5,107,131,.16); border-color: rgba(196,154,82,.42); }
+.marquee { animation: marquee 28s linear infinite; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.fade-up { animation: fadeUp .8s ease both; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+.float { animation: float 5s ease-in-out infinite; }
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+.product-zoom img { transition: transform .55s ease; }
+.product-zoom:hover img { transform: scale(1.08); }
+button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
