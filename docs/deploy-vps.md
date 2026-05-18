@@ -11,6 +11,36 @@ Este projeto exige Node.js **20.11.0 ou superior**. A versão esperada está reg
 - `package.json` em `engines`
 - `scripts/check-node-version.cjs`
 
+## Erro `Could not find a production build in the '.next' directory`
+
+Esse erro significa que o PM2 está tentando executar `next start` sem existir um build válido na pasta `.next`. O servidor Next.js de produção **não compila automaticamente**; ele apenas serve o resultado criado previamente por `npm run build`.
+
+### Correção rápida na VPS
+
+```bash
+cd /home/deploy/sulapraia
+pm2 stop sulapraia || true
+rm -rf .next
+npm ci
+npm run build
+pm2 restart sulapraia --update-env || pm2 start ecosystem.config.cjs
+pm2 save
+pm2 status
+```
+
+Se ainda não existir `package-lock.json`, troque `npm ci` por `npm install` na primeira instalação.
+
+Se o processo estiver travado como `errored`, recrie o app no PM2:
+
+```bash
+cd /home/deploy/sulapraia
+pm2 delete sulapraia || true
+npm run build
+pm2 start ecosystem.config.cjs
+pm2 save
+pm2 logs sulapraia
+```
+
 ## Conferir versão atual na VPS
 
 ```bash
@@ -61,7 +91,7 @@ cd /home/deploy/sulapraia
 rm -rf node_modules .next
 npm ci
 npm run build
-pm2 restart sulapraia
+pm2 restart sulapraia --update-env
 ```
 
 ## Variáveis de ambiente de produção
@@ -77,13 +107,20 @@ NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX
 NEXT_PUBLIC_META_PIXEL_ID=000000000000000
 ```
 
+Depois de alterar variáveis de ambiente públicas do Next.js, rode o build novamente, porque variáveis `NEXT_PUBLIC_*` são embutidas no bundle no momento do build:
+
+```bash
+npm run build
+pm2 restart sulapraia --update-env
+```
+
 ## Comandos de produção recomendados
 
 ```bash
 npm run check:node
 npm ci
 npm run build
-pm2 start npm --name sulapraia -- run start
+pm2 start ecosystem.config.cjs
 pm2 save
 ```
 
@@ -95,5 +132,15 @@ git pull
 npm run check:node
 npm ci
 npm run build
-pm2 restart sulapraia
+pm2 restart sulapraia --update-env
+```
+
+## Verificações úteis
+
+```bash
+ls -la .next
+cat .next/BUILD_ID
+pm2 status
+pm2 logs sulapraia --lines 50
+curl -I http://localhost:3000
 ```
